@@ -1,44 +1,49 @@
 <ControlUI>:
-    val: [slider_H_min.value,slider_H_max.value,slider_S_min.value,slider_S_max.value,slider_V_min.value,slider_V_max.value,slider_M.value]
-    showBinarie: False
+    # val: [slider_H_min.value,slider_H_max.value,slider_S_min.value,slider_S_max.value,slider_V_min.value,slider_V_max.value,slider_M.value]
+    # showBinarie: False
+    cvImage: image_1
     BoxLayout:
         size: root.size
         orientation: 'vertical'
         padding: 50
-        Label:
-            text: "Valor:"+str(slider_H_min.value)+","+str(slider_H_max.value)+","+str(slider_S_min.value)
-        Slider:
-            id: slider_H_min
-            max: 255
-            value: 0
-            on_value: slider_H_min.value = self.value
-        Slider:
-            id: slider_H_max
-            max: 255
-            value: 60
-            on_value: slider_H_max.value = self.value
-        Slider:
-            id: slider_S_min
-            max: 255
-            value: 32
-            on_value: slider_S_min.value = self.value
-        Slider:
-            id: slider_S_max
-            max: 255
-            value: 140
-            on_value: slider_S_max.value = self.value
-        Slider:
-            id: slider_V_min
-            max: 200
-            value: 140
-            on_value: slider_V_min.value = self.value
-        Slider:
-            id: slider_V_max
-            max: 200
-            value: 140
-            on_value: slider_V_max.value = self.value
-        Slider:
-            id: slider_M
-            max: 200
-            value: 140
-            on_value: slider_M.value = self.value
+        # Label:
+        #     text: "Valor:"+str(slider_H_min.value)+","+str(slider_H_max.value)+","+str(slider_S_min.value)
+        # Slider:
+        #     id: slider_H_min
+        #     max: 255
+        #     value: 0
+        #     on_value: slider_H_min.value = self.value
+        # Slider:
+        #     id: slider_H_max
+        #     max: 255
+        #     value: 60
+        #     on_value: slider_H_max.value = self.value
+        # Slider:
+        #     id: slider_S_min
+        #     max: 255
+        #     value: 32
+        #     on_value: slider_S_min.value = self.value
+        # Slider:
+        #     id: slider_S_max
+        #     max: 255
+        #     value: 140
+        #     on_value: slider_S_max.value = self.value
+        # Slider:
+        #     id: slider_V_min
+        #     max: 200
+        #     value: 140
+        #     on_value: slider_V_min.value = self.value
+        # Slider:
+        #     id: slider_V_max
+        #     max: 200
+        #     value: 140
+        #     on_value: slider_V_max.value = self.value
+        # Slider:
+        #     id: slider_M
+        #     max: 200
+        #     value: 140
+        #     on_value: slider_M.value = self.value
+        Image:
+            id: image_1
+            # allow_stretch: True
+            # keep_ratio: True
