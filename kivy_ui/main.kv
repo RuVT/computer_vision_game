@@ -4,7 +4,7 @@
     cvImage: image_1
     cvFilter: image_2
     cvActiveBloops: switch_1
-    blob_coor: coord
+    # blob_coor: coord
     BoxLayout:
         size: root.size
         orientation: 'vertical'
@@ -115,13 +115,23 @@
             id: switch_1
         BoxLayout:
             Image:
+                padding: 100,0
                 id: image_1
+                canvas:
+                    Rectangle:
+                        pos:500,500
+                        size:50,50
+                        Color:
+                            rgb: 1,1,1
+                    Ellipse:
+                        id: ellipse
+                        pos: root.blob_coor[0], root.blob_coor[1]
+                        size: 50,50
+                        Color:
+                            rgb: 1,1,1
+
             Image:
                 id: image_2
-            Label:
-                id: coord
-                size_hint: 0.1,1
-                text: 'X,y'
 
         # Label:
         #     text: "Valor:"+str(slider_H_min.value)+","+str(slider_H_max.value)+","+str(slider_S_min.value)
