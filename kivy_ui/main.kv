@@ -3,6 +3,7 @@
     # showBinarie: False
     cvImage: image_1
     cvFilter: image_2
+    cvBlob: image_3
     cvActiveBloops: switch_1
     # blob_coor: coord
     BoxLayout:
@@ -110,28 +111,30 @@
                         size_hint: (0.5,1.5)
                         text: str(int(max_v.value))
                         multiline: False
-        Switch:
-            size_hint: (0.1,0.1)
-            id: switch_1
         BoxLayout:
-            Image:
-                padding: 100,0
-                id: image_1
-                canvas:
-                    Rectangle:
-                        pos:500,500
-                        size:50,50
-                        Color:
-                            rgb: 1,1,1
-                    Ellipse:
-                        id: ellipse
-                        pos: root.blob_coor[0], root.blob_coor[1]
-                        size: 50,50
-                        Color:
-                            rgb: 1,1,1
+            size_hint: (1, 0.1)
+            orientation: 'horizontal'
+            Switch:
+                id: switch_1
+            Label:
+                text: str(int(image_1.size[0]))+", "+str(int(image_1.size[1]))
+            Label:
+                text: str(int(root.blob_coor[0]))+", "+str(int(root.blob_coor[1]))
 
+        BoxLayout:
+            canvas:
+                Ellipse:
+                    id: ellipse
+                    pos: root.blob_coor[0], root.blob_coor[1]
+                    size: 50,50
+                    Color:
+                        rgb: 1,1,1
+            Image:
+                id: image_1
             Image:
                 id: image_2
+            Image:
+                id: image_3
 
         # Label:
         #     text: "Valor:"+str(slider_H_min.value)+","+str(slider_H_max.value)+","+str(slider_S_min.value)

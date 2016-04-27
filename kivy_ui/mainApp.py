@@ -23,6 +23,7 @@ class ControlUI(Widget):
 	val = ListProperty([])
 	cvImage = ObjectProperty();
 	cvFilter = ObjectProperty();
+	cvBlob = ObjectProperty();
 	cvActiveBloops = ObjectProperty();
 	blob_coor = ListProperty([0,0]);
 	# showBinarie = BooleanProperty(False)
@@ -43,13 +44,18 @@ class ControlUI(Widget):
 		img2 = img2.erode(1)
 		img2 = img2.dilate(2)
 		if self.cvActiveBloops.active:
-			blops = img2.findBlobs(minsize=50, maxsize=200)
+			blops = img2.findBlobs()
 			if blops:
-				for b in blops:
-					if b.isRectangle() and b.width>50:
-						x, y = b.centroid()
-						self.blob_coor[0] = x
-						self.blob_coor[1] = y
+				largest = blops[-1]
+				x, y = largest.centroid()
+				self.blob_coor[0] = x
+				self.blob_coor[1] = y
+				self.cvBlob.texture = getKivyTexture(largest.getMaskedImage())
+				# for b in blops:
+				# 	if b.isRectangle():
+				# 		x, y = b.centroid()
+				# 		self.blob_coor[0] = x
+				# 		self.blob_coor[1] = y
 		self.cvFilter.texture = getKivyTexture(img2)
 		self.cvImage.texture = getKivyTexture(self.img)
 
