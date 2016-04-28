@@ -1,0 +1,17 @@
+<GameScreen>:
+	on_pre_enter: self.init()
+    on_leave: self.end()
+    canvas:
+        Ellipse:
+            id: ellipse
+            pos: root.blob_coor[0], root.blob_coor[1]
+            size: 50,50
+            Color:
+                rgb: 1,1,1
+    AnchorLayout:
+    	anchor_x: 'right'
+    	anchor_y: 'top'
+    	Button:
+    		size_hint: 0.2,0.05
+    		text: 'Back to Menu'
+    		on_release: root.manager.current = "Menu"
