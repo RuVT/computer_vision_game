@@ -6,6 +6,7 @@ from kivy.properties import NumericProperty, ReferenceListProperty
 from kivy.properties import ObjectProperty, ListProperty, BooleanProperty
 from kivy.clock import Clock
 from kivy.graphics.texture import Texture
+from kivy.graphics import Color as kvColor, Ellipse, Line
 from kivy.lang import Builder
 
 from SimpleCV import Camera, Display, HaarCascade, Color, Image
@@ -13,6 +14,8 @@ from SimpleCV.base import np
 import cv2
 
 from pygame.image import tostring
+
+import numpy
 
 def getKivyTexture(img):
 	buffer = tostring(img.getPGSurface(),'RGB',True)
@@ -48,6 +51,8 @@ class GameInstance:
 
 
 class CommonScreen:
+	blob_coor = ListProperty([0,0])
+
 	def init(self):
 		Clock.schedule_interval(self.update, 1.0/60.0)
 
@@ -56,7 +61,17 @@ class CommonScreen:
 
 
 class GameScreen(Screen,CommonScreen):
-	blob_coor = ListProperty([0,0])
+	game = ObjectProperty()
+	last_pos = [None, None]
+	limit_dist = 30.
+
+	def movement_filter(self, pos):
+		if self.last_pos[0] is None:
+			self.last_pos[0] = pos
+		else:
+			dist = numpy.linalg.norm(pos-self.last_pos[0])
+			if dist < self.limit_dist:
+				self.last_pos[1] = pos
 
 	def update(self, dt):
 		self.img = GameInstance().cam.getImage().flipHorizontal()
@@ -69,8 +84,21 @@ class GameScreen(Screen,CommonScreen):
 		if blops:
 			largest = blops[-1]
 			x, y = largest.centroid()
+			y = self.size[1]-y
+			self.movement_filter(numpy.array([x, y]))
 			self.blob_coor[0] = x
-			self.blob_coor[1] = self.size[1]-y
+			self.blob_coor[1] = y
+			if self.last_pos[1] is not None:
+				with self.game.canvas:
+					kvColor(1, 1, 0)
+					d = 10.
+					# Ellipse(pos=(x - d / 2, self.blob_coor[1] - d / 2), size=(d, d))
+					Line(points=(self.last_pos[0][0], self.last_pos[0][1],self.last_pos[1][0], self.last_pos[1][1]))
+					self.last_pos[0] = self.last_pos[1]
+
+	def clear(self):
+		self.game.canvas.clear()
+		self.last_pos = [None, None]
 
 
 class MenuScreen(Screen):
@@ -83,7 +111,6 @@ class ConfigScreen(Screen,CommonScreen):
 	cvFilter = ObjectProperty()
 	cvBlob = ObjectProperty()
 	cvActiveBloops = ObjectProperty()
-	blob_coor = ListProperty([0,0]);
 
 	def update(self, dt):
 		self.img = GameInstance().cam.getImage().flipHorizontal()
