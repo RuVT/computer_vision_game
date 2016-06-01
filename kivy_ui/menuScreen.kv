@@ -1,0 +1,14 @@
+<MenuScreen>:
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_x: 'center'
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint: 0.5, 0.25
+            padding: 10
+            Button:
+                text: "Play"
+                on_release: root.manager.current = 'Game'
+            Button:
+                text: "Configuration"
+                on_release: root.manager.current = 'Configuration'

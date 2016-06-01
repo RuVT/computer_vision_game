@@ -1,0 +1,131 @@
+<ConfigScreen>:
+    val: [min_h.value,min_s.value,min_v.value,max_h.value,max_s.value,max_v.value]
+    cvImage: image_1
+    cvFilter: image_2
+    cvBlob: image_3
+    cvActiveBloops: switch_1
+    on_pre_enter: self.init()
+    on_leave: self.end()
+    BoxLayout:
+        size: root.size
+        orientation: 'vertical'
+        padding: 10
+        GridLayout:
+            size_hint: (1, 0.2)
+            orientation: 'vertical'
+            cols: 3
+            rows: 2
+            BoxLayout:
+                orientation: 'horizontal'
+                Slider:
+                    id: min_h
+                    max: 255
+                    value: int(min_h_text.text)
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        size_hint: (0.5,0.5)
+                        text: "Min H"
+                    TextInput:
+                        id: min_h_text
+                        size_hint: (0.5,1.5)
+                        text: str(int(min_h.value))
+                        multiline: False
+            BoxLayout:
+                orientation: 'horizontal'
+                Slider:
+                    id: min_s
+                    max: 255
+                    value: int(min_s_text.text)
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        size_hint: (0.5,0.5)
+                        text: "Min S"
+                    TextInput:
+                        id: min_s_text
+                        size_hint: (0.5,1.5)
+                        text: str(int(min_s.value))
+                        multiline: False
+            BoxLayout:
+                orientation: 'horizontal'
+                Slider:
+                    id: min_v
+                    max: 255
+                    value: int(min_v_text.text)
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        size_hint: (0.5,0.5)
+                        text: "Min V"
+                    TextInput:
+                        id: min_v_text
+                        size_hint: (0.5,1.5)
+                        text: str(int(min_v.value))
+                        multiline: False
+            BoxLayout:
+                orientation: 'horizontal'
+                Slider:
+                    id: max_h
+                    max: 255
+                    value: int(max_h_text.text)
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        size_hint: (0.5,0.5)
+                        text: "Max H"
+                    TextInput:
+                        id: max_h_text
+                        size_hint: (0.5,1.5)
+                        text: str(int(max_h.value))
+                        multiline: False
+            BoxLayout:
+                orientation: 'horizontal'
+                Slider:
+                    id: max_s
+                    max: 255
+                    value: int(max_s_text.text)
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        size_hint: (0.5,0.5)
+                        text: "Max S"
+                    TextInput:
+                        id: max_s_text
+                        size_hint: (0.5,1.5)
+                        text: str(int(max_s.value))
+                        multiline: False
+            BoxLayout:
+                orientation: 'horizontal'
+                Slider:
+                    id: max_v
+                    max: 255
+                    value: int(max_v_text.text)
+                BoxLayout:
+                    orientation: 'vertical'
+                    Label:
+                        size_hint: (0.5,0.5)
+                        text: "Max V"
+                    TextInput:
+                        id: max_v_text
+                        size_hint: (0.5,1.5)
+                        text: str(int(max_v.value))
+                        multiline: False
+        BoxLayout:
+            padding:5
+            size_hint: (1, 0.1)
+            orientation: 'horizontal'
+            Switch:
+                id: switch_1
+            Button:
+                size_hint: 0.7,0.5
+                text: 'Back to Menu'
+                on_release: root.manager.current = 'Menu'
+
+        BoxLayout:
+            Image:
+                id: image_1
+            Image:
+                id: image_2
+            Image:
+                id: image_3
